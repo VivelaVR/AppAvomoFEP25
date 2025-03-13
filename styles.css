@@ -42,6 +42,7 @@ body {
     overflow: hidden;
     position: relative;
     cursor: pointer;
+    padding-top: 10px; /* Ajout pour espacer la case à cocher */
 }
 
 .card:hover {
@@ -64,13 +65,20 @@ body {
     border-bottom: 5px solid #C1272D;
 }
 
-/* Cases à cocher pour sélectionner les visites */
+/* ✅ Agrandissement des cases à cocher */
 .visit-checkbox {
     position: absolute;
     top: 10px;
     left: 10px;
-    transform: scale(1.5);
+    width: 25px;  /* Augmentation de la taille */
+    height: 25px; /* Augmentation de la taille */
     cursor: pointer;
+    transform: scale(1.5);
+}
+
+/* Ajout d'un effet au survol */
+.visit-checkbox:hover {
+    filter: brightness(90%);
 }
 
 /* Boutons */
@@ -84,8 +92,6 @@ body {
     text-decoration: none;
     font-weight: bold;
     transition: background 0.3s, transform 0.2s;
-    border: none;
-    cursor: pointer;
 }
 
 .btn:hover {
@@ -93,11 +99,30 @@ body {
     transform: scale(1.05);
 }
 
-/* Conteneur du bouton de partage */
+/* Bouton de partage */
 #share-btn {
     margin-top: 20px;
-    padding: 12px 25px;
+    padding: 14px 28px;
     background-color: #C1272D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+#share-btn:hover {
+    background-color: #a02025;
+    transform: scale(1.05);
+}
+
+/* Bouton "Tout sélectionner/désélectionner" */
+#select-all-btn {
+    margin-top: 15px;
+    padding: 12px 24px;
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -107,8 +132,8 @@ body {
     transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
-#share-btn:hover {
-    background-color: #a02025;
+#select-all-btn:hover {
+    background-color: #3e8e41;
     transform: scale(1.05);
 }
 
@@ -123,7 +148,7 @@ body {
         width: 90%;
     }
 
-    #share-btn {
+    #share-btn, #select-all-btn {
         width: 80%;
         padding: 14px;
     }
