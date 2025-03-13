@@ -22,9 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const container = document.getElementById("visites-container");
     const shareBtn = document.getElementById("share-btn");
-    const selectAllBtn = document.getElementById("select-all-btn");
 
-    // 🔹 Générer dynamiquement les cartes des visites
+    // 🔹 Générer les cartes dynamiquement
     visites.forEach(visit => {
         let card = document.createElement("div");
         card.classList.add("card");
@@ -52,24 +51,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let message = "🌐 Voici les visites virtuelles sélectionnées :\n" + selectedVisits.join("\n");
 
-        let emailLink = `mailto:?subject=Visites Virtuelles&body=${encodeURIComponent(message)}`;
-        let smsLink = `sms:?body=${encodeURIComponent(message)}`;
+        // 🔹 Afficher la boîte de sélection
+        let choice = prompt("📤 Comment souhaitez-vous partager les visites ?\n1️⃣ Gmail\n2️⃣ SMS\n3️⃣ LinkedIn\n\nEntrez le numéro de votre choix :");
 
-        alert("✅ Vous pouvez maintenant partager les visites par Email ou SMS.");
-
-        window.open(emailLink, "_blank");
-        window.open(smsLink, "_blank");
-    });
-
-    // 🔹 Gérer le bouton de sélection/désélection de toutes les visites
-    selectAllBtn.addEventListener("click", function() {
-        let checkboxes = document.querySelectorAll(".visit-checkbox");
-        let allChecked = [...checkboxes].every(checkbox => checkbox.checked);
-
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = !allChecked;
-        });
-
-        selectAllBtn.textContent = allChecked ? "Tout sélectionner" : "Tout désélectionner";
+        // 🔹 Ouvrir l'application choisie
+        if (choice === "1") {
+            let emailLink = `mailto:?subject=Visites Virtuelles&body=${encodeURIComponent(message)}`;
+            window.open(emailLink, "_blank");
+        } 
+        else if (choice === "2") {
+            let smsLink = `sms:?body=${encodeURIComponent(message)}`;
+            window.open(smsLink, "_blank");
+        } 
+        else if (choice === "3") {
+            let linkedInLink = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(selectedVisits.join("\n"))}&title=Visites%20Virtuelles&summary=${encodeURIComponent(message)}`;
+            window.open(linkedInLink, "_blank");
+        } 
+        else {
+            alert("❌ Choix invalide. Veuillez entrer 1, 2 ou 3.");
+        }
     });
 });
