@@ -64,6 +64,15 @@ body {
     border-bottom: 5px solid #C1272D;
 }
 
+/* Cases à cocher pour sélectionner les visites */
+.visit-checkbox {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
 /* Boutons */
 .btn {
     display: inline-block;
@@ -75,6 +84,8 @@ body {
     text-decoration: none;
     font-weight: bold;
     transition: background 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -82,16 +93,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Cases à cocher pour sélectionner les visites */
-.visit-checkbox {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    transform: scale(1.5);
-    cursor: pointer;
-}
-
-/* Bouton de partage */
+/* Conteneur du bouton de partage */
 #share-btn {
     margin-top: 20px;
     padding: 12px 25px;
@@ -105,6 +107,12 @@ body {
     transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
+#share-btn:hover {
+    background-color: #a02025;
+    transform: scale(1.05);
+}
+
+/* Conteneur du formulaire d'ajout */
 .add-visit-container {
     background: white;
     padding: 20px;
@@ -119,12 +127,15 @@ body {
     color: #C1272D;
 }
 
+/* Formulaire d'ajout */
 #add-visit-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #add-visit-form input {
+    width: 100%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
@@ -139,15 +150,12 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    width: 100%;
 }
 
 #add-visit-form button:hover {
     background: #a02025;
-}
-
-#share-btn:hover {
-    background-color: #a02025;
     transform: scale(1.05);
 }
 
@@ -165,5 +173,9 @@ body {
     #share-btn {
         width: 80%;
         padding: 14px;
+    }
+
+    .add-visit-container {
+        width: 90%;
     }
 }
