@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
         { name: "DEL ARTE Brignais", url: "https://scan.avomovr.fr/show/?m=vx1kmMnmxNf", image: "images/brignais.jpg" },
         { name: "DEL ARTE Besançon Miresey", url: "https://scan.avomovr.fr/show/?m=ezeMW1f2zbk", image: "images/besancon.jpg" },
         { name: "Pépinière d'entreprise de Châteauroux", url: "https://scan.avomovr.fr/show/?m=rVThqrE36Hq", image: "images/pepiniere.jpg" },
-        { name: "Projet gîtes et studio", url: "https://scan.avomovr.fr/show/?m=JsatGWhhCJW", image: "images/gites.jpg" },
         { name: "Foyer de vie Les Coteaux", url: "https://scan.avomovr.fr/show/?m=hG1a9Aht5Bp", image: "images/coteaux.jpg" },
         { name: "L’Onglerie Le Porge", url: "https://scan.avomovr.fr/show/?m=jFrmbGsawT3", image: "images/onglerie.jpg" },
         { name: "Eat Salad Châteauroux", url: "https://scan.avomovr.fr/show/?m=2fmziQUEHv7", image: "images/eatsalad.jpg" },
