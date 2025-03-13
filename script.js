@@ -1,49 +1,51 @@
-const visites = [
-    { nom: "DEL ARTE Brignais", url: "https://scan.avomovr.fr/show/?m=vx1kmMnmxNf" },
-    { nom: "DEL ARTE Besançon Miresey", url: "https://scan.avomovr.fr/show/?m=ezeMW1f2zbk" },
-    { nom: "Pépinière d'entreprise de Châteauroux", url: "https://scan.avomovr.fr/show/?m=rVThqrE36Hq" },
-    { nom: "Projet gîtes et studio", url: "https://scan.avomovr.fr/show/?m=JsatGWhhCJW" },
-    { nom: "Foyer de vie Les Coteaux", url: "https://scan.avomovr.fr/show/?m=hG1a9Aht5Bp" },
-    { nom: "L’Onglerie Le Porge", url: "https://scan.avomovr.fr/show/?m=jFrmbGsawT3" },
-    { nom: "Eat Salad Châteauroux", url: "https://scan.avomovr.fr/show/?m=2fmziQUEHv7" },
-    { nom: "Château Boisrenault", url: "https://scan.avomovr.fr/show/?m=ctqEDeSd8ke" },
-    { nom: "Business Connect Day", url: "https://scan.avomovr.fr/show/?m=6oT8c8mfPoL" },
-    { nom: "Relais Saint-Jacques", url: "https://scan.avomovr.fr/show/?m=eJpk7Qt2wTR" },
-    { nom: "Guinguette de Belle Isle", url: "https://scan.avomovr.fr/show/?m=iQdBAz3k3fL" },
-    { nom: "Jardin Les Cordeliers", url: "https://mpembed.com/show/?m=ozBLfab5XSQ&mpu=1624&premium=1" },
-    { nom: "Del Arte Dorlisheim", url: "https://scan.avomovr.fr/show/?m=EKgDks7kdr5" },
-    { nom: "Franchise Expo Paris 2024", url: "https://mpembed.com/show/?m=tNyTLiWHcFp&mpu=1624" },
-    { nom: "DEL ARTE LIBOURNE", url: "https://mpembed.com/show/?m=zca9WQuh75g&mpu=1624" },
-    { nom: "La Varrière", url: "https://scan.avomovr.fr/show/?m=M4CL8xbdnaK" },
-    { nom: "Église Saint André", url: "https://mpembed.com/show/?m=fTmxbygCkQX&mpu=1624" }
-];
+document.addEventListener("DOMContentLoaded", function() {
+    const visites = [
+        { name: "DEL ARTE Brignais", url: "https://scan.avomovr.fr/show/?m=vx1kmMnmxNf", image: "images/brignais.jpg" },
+        { name: "DEL ARTE Besançon Miresey", url: "https://scan.avomovr.fr/show/?m=ezeMW1f2zbk", image: "images/besancon.jpg" },
+        { name: "Pépinière d'entreprise de Châteauroux", url: "https://scan.avomovr.fr/show/?m=rVThqrE36Hq", image: "images/pepiniere.jpg" },
+        { name: "Projet gîtes et studio", url: "https://scan.avomovr.fr/show/?m=JsatGWhhCJW", image: "images/gites.jpg" },
+        { name: "Foyer de vie Les Coteaux", url: "https://scan.avomovr.fr/show/?m=hG1a9Aht5Bp", image: "images/coteaux.jpg" },
+        { name: "L’Onglerie Le Porge", url: "https://scan.avomovr.fr/show/?m=jFrmbGsawT3", image: "images/onglerie.jpg" },
+        { name: "Eat Salad Châteauroux", url: "https://scan.avomovr.fr/show/?m=2fmziQUEHv7", image: "images/eatsalad.jpg" },
+        { name: "Château Boisrenault", url: "https://scan.avomovr.fr/show/?m=ctqEDeSd8ke", image: "images/boisrenault.jpg" },
+        { name: "Business Connect Day", url: "https://scan.avomovr.fr/show/?m=6oT8c8mfPoL", image: "images/businessconnect.jpg" },
+        { name: "Relais Saint-Jacques", url: "https://scan.avomovr.fr/show/?m=eJpk7Qt2wTR", image: "images/relaissaintjacques.jpg" }
+    ];
 
-// Génération de l'accueil
-if (document.getElementById("visites-container")) {
     const container = document.getElementById("visites-container");
-    visites.forEach(visite => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `<a href="visite.html?url=${encodeURIComponent(visite.url)}&nom=${encodeURIComponent(visite.nom)}">
-                            <div class="card-img" style="background-image: url('images/logo.png');"></div>
-                            <p>${visite.nom}</p>
-                         </a>`;
-        container.appendChild(div);
-    });
-}
 
-// Génération des pages de visites
-if (document.getElementById("visite-iframe")) {
-    const params = new URLSearchParams(window.location.search);
-    const url = params.get("url");
-    const nom = params.get("nom");
-    
-    if (url && nom) {
-        document.getElementById("title").innerText = nom;
-        document.getElementById("visite-title").innerText = nom;
-        document.getElementById("visite-iframe").src = url;
-        document.getElementById("external-link").href = url;
-    } else {
-        document.body.innerHTML = "<h1>Visite introuvable</h1>";
-    }
-}
+    visites.forEach(visit => {
+        let card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+            <input type="checkbox" class="visit-checkbox" value="${visit.url}">
+            <a href="${visit.url}" target="_blank">
+                <div class="card-img" style="background-image: url('${visit.image}');"></div>
+                <p>${visit.name}</p>
+            </a>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById("share-btn").addEventListener("click", function() {
+        let selectedVisits = [];
+        document.querySelectorAll(".visit-checkbox:checked").forEach((checkbox) => {
+            selectedVisits.push(checkbox.value);
+        });
+
+        if (selectedVisits.length === 0) {
+            alert("Veuillez sélectionner au moins une visite à partager.");
+            return;
+        }
+
+        let message = "Voici les visites virtuelles sélectionnées :\n" + selectedVisits.join("\n");
+
+        let emailLink = `mailto:?subject=Visites Virtuelles&body=${encodeURIComponent(message)}`;
+        let smsLink = `sms:?body=${encodeURIComponent(message)}`;
+
+        alert("Vous pouvez maintenant partager les visites par Email ou SMS.");
+
+        window.open(emailLink, "_blank");
+        window.open(smsLink, "_blank");
+    });
+});
