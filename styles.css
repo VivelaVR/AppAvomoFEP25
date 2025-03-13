@@ -9,7 +9,7 @@ body {
 
 /* En-tête */
 .header {
-    background-color: #5026f9;
+    background-color: #000e898b;
     color: white;
     padding: 20px;
     text-align: center;
@@ -103,7 +103,7 @@ body {
 #share-btn {
     margin-top: 20px;
     padding: 14px 28px;
-    background-color: #274ed8;
+    background-color: #000e898b;
     color: white;
     border: none;
     border-radius: 5px;
@@ -114,7 +114,7 @@ body {
 }
 
 #share-btn:hover {
-    background-color: #292fdc;
+    background-color: #000e898b;
     transform: scale(1.05);
 }
 
