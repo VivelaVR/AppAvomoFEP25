@@ -44,7 +44,7 @@
         const userInput = event.results[0][0].transcript;
         responseDiv.innerText = "⏳ Analyse en cours : " + userInput;
 
-        fetch("https://avomovr.app.n8n.cloud/webhook/chatbot", {
+        fetch("https://avomovr.app.n8n.cloud/webhook-test/d9a5c4f1-f381-4ffd-9659-ea95411ca5c2", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: userInput })
