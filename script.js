@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         { name: "Guinguette de Belle Isle", url: "https://scan.avomovr.fr/show/?m=iQdBAz3k3fL", image: "images/guinguette.jpg" },
         { name: "Jardin Les Cordeliers", url: "https://mpembed.com/show/?m=ozBLfab5XSQ&mpu=1624&premium=1", image: "images/cordeliers.jpg" },
         { name: "Del Arte Dorlisheim", url: "https://scan.avomovr.fr/show/?m=EKgDks7kdr5", image: "images/dorlisheim.jpg" },
-        { name: "Franchise Expo Paris 2024", url: "https://mpembed.com/show/?m=tNyTLiWHcFp&mpu=1624", image: "images/franchiseexpo.jpg" },
+        { name: "Franchise Expo Paris 2025", url: "https://scan.avomovr.fr/show/?m=k1mqQXEo5Sc", image: "images/franchiseexpo.jpg" },
         { name: "DEL ARTE LIBOURNE", url: "https://mpembed.com/show/?m=zca9WQuh75g&mpu=1624", image: "images/libourne.jpg" },
         { name: "La Varrière", url: "https://scan.avomovr.fr/show/?m=M4CL8xbdnaK", image: "images/varriere.jpg" },
         { name: "Église Saint André", url: "https://mpembed.com/show/?m=fTmxbygCkQX&mpu=1624", image: "images/saintandre.jpg" }
