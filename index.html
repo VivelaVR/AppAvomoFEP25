@@ -30,39 +30,47 @@
     </div>
 
     <script>
-    const micBtn = document.getElementById("mic-btn");
-    const responseDiv = document.getElementById("chat-response");
-
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = "fr-FR";
-
-    micBtn.addEventListener("click", () => {
-        recognition.start();
-    });
-
-    recognition.onresult = function(event) {
-        const userInput = event.results[0][0].transcript;
-        responseDiv.innerText = "⏳ Analyse en cours : " + userInput;
-
-        fetch("https://avomovr.app.n8n.cloud/webhook-test/d9a5c4f1-f381-4ffd-9659-ea95411ca5c2", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: userInput })
-        })
-        .then(res => res.json())
-        .then(data => {
-            responseDiv.innerText = "🤖 " + data.reply;
-
-            const synth = window.speechSynthesis;
-            const utterance = new SpeechSynthesisUtterance(data.reply);
-            utterance.lang = "fr-FR";
-            synth.speak(utterance);
-        })
-        .catch((error) => {
-    console.error("Erreur du fetch :", error);
-    responseDiv.innerText = "❌ Une erreur est survenue : " + error.message;
+        const micBtn = document.getElementById("mic-btn");
+        const responseDiv = document.getElementById("chat-response");
+        
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = "fr-FR";
+        
+        micBtn.addEventListener("click", () => {
+            recognition.start();
+            responseDiv.innerText = "🎤 En attente de votre voix...";
         });
-    };
-    </script>
+        
+        recognition.onresult = function(event) {
+            const userInput = event.results[0][0].transcript;
+            console.log("🎙️ Tu as dit :", userInput);
+            responseDiv.innerText = "⏳ Analyse en cours : " + userInput;
+        
+            console.log("🛠️ Envoi au webhook:", userInput);
+            fetch("https://avomovr.app.n8n.cloud/webhook-test/d9a5c4f1-f381-4ffd-9659-ea95411ca5c2", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userInput })
+            })
+            .then(res => {
+                console.log("📩 Réponse reçue du webhook");
+                return res.json();
+            })
+            .then(data => {
+                console.log("🤖 Contenu de la réponse :", data);
+                responseDiv.innerText = "🤖 " + data.reply;
+        
+                const synth = window.speechSynthesis;
+                const utterance = new SpeechSynthesisUtterance(data.reply);
+                utterance.lang = "fr-FR";
+                synth.speak(utterance);
+            })
+            .catch((error) => {
+                console.error("❌ Erreur du fetch :", error);
+                responseDiv.innerText = "❌ Une erreur est survenue : " + error.message;
+            });
+        };
+        </script>
+        
 </body>
 </html>
