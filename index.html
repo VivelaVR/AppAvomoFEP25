@@ -44,7 +44,7 @@
         const userInput = event.results[0][0].transcript;
         responseDiv.innerText = "⏳ Analyse en cours : " + userInput;
 
-        fetch("https://TON_DOMAINE_N8N/webhook/chatbot", {
+        fetch("https://avomovr.app.n8n.cloud/webhook/chatbot", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: userInput })
