@@ -1,3 +1,4 @@
+
 /* Styles de base */
 body {
     font-family: Arial, sans-serif;
@@ -42,7 +43,7 @@ body {
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    padding-top: 10px; /* Ajout pour espacer la case à cocher */
+    padding-top: 10px;
 }
 
 .card:hover {
@@ -65,18 +66,17 @@ body {
     border-bottom: 5px solid #C1272D;
 }
 
-/* ✅ Agrandissement des cases à cocher */
+/* Cases à cocher */
 .visit-checkbox {
     position: absolute;
     top: 10px;
     left: 10px;
-    width: 25px;  /* Augmentation de la taille */
-    height: 25px; /* Augmentation de la taille */
+    width: 25px;
+    height: 25px;
     cursor: pointer;
     transform: scale(1.5);
 }
 
-/* Ajout d'un effet au survol */
 .visit-checkbox:hover {
     filter: brightness(90%);
 }
@@ -118,7 +118,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Bouton "Tout sélectionner/désélectionner" */
+/* Bouton de sélection */
 #select-all-btn {
     margin-top: 15px;
     padding: 12px 24px;
@@ -137,7 +137,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Responsivité pour mobiles */
+/* Responsive */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -152,4 +152,40 @@ body {
         width: 80%;
         padding: 14px;
     }
+}
+
+/* 🔥 Ajout chatbot vocal */
+.chatbot-container {
+    margin-top: 40px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mic-btn {
+    background-color: #000e898b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+#mic-btn:hover {
+    background-color: #000c6a;
+    transform: scale(1.05);
+}
+
+#chat-response {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+    min-height: 30px;
 }

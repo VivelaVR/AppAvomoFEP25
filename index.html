@@ -22,5 +22,46 @@
     <div class="buttons">
         <button id="share-btn">Partager les visites</button>
     </div>
+
+    <!-- Chatbot vocal -->
+    <div class="chatbot-container">
+        <button id="mic-btn">🎤 Parler avec Avomo IA</button>
+        <div id="chat-response">Posez-moi une question !</div>
+    </div>
+
+    <script>
+    const micBtn = document.getElementById("mic-btn");
+    const responseDiv = document.getElementById("chat-response");
+
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "fr-FR";
+
+    micBtn.addEventListener("click", () => {
+        recognition.start();
+    });
+
+    recognition.onresult = function(event) {
+        const userInput = event.results[0][0].transcript;
+        responseDiv.innerText = "⏳ Analyse en cours : " + userInput;
+
+        fetch("https://TON_DOMAINE_N8N/webhook/chatbot", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userInput })
+        })
+        .then(res => res.json())
+        .then(data => {
+            responseDiv.innerText = "🤖 " + data.reply;
+
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(data.reply);
+            utterance.lang = "fr-FR";
+            synth.speak(utterance);
+        })
+        .catch(() => {
+            responseDiv.innerText = "❌ Une erreur est survenue. Veuillez réessayer.";
+        });
+    };
+    </script>
 </body>
 </html>
