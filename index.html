@@ -58,8 +58,9 @@
             utterance.lang = "fr-FR";
             synth.speak(utterance);
         })
-        .catch(() => {
-            responseDiv.innerText = "❌ Une erreur est survenue. Veuillez réessayer.";
+        .catch((error) => {
+    console.error("Erreur du fetch :", error);
+    responseDiv.innerText = "❌ Une erreur est survenue : " + error.message;
         });
     };
     </script>
