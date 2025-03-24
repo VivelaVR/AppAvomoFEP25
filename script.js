@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         { name: "Guinguette de Belle Isle", url: "https://scan.avomovr.fr/show/?m=iQdBAz3k3fL", image: "images/guinguette.jpg" },
         { name: "Jardin Les Cordeliers", url: "https://mpembed.com/show/?m=ozBLfab5XSQ&mpu=1624&premium=1", image: "images/cordeliers.jpg" },
         { name: "Del Arte Dorlisheim", url: "https://scan.avomovr.fr/show/?m=EKgDks7kdr5", image: "images/dorlisheim.jpg" },
-        { name: "Franchise Expo Paris 2025", url: "https://scan.avomovr.fr/show/?m=k1mqQXEo5Sc", image: "images/franchiseexpo.jpg" },
+        { name: "Franchise Expo Paris 2024", url: "https://mpembed.com/show/?m=tNyTLiWHcFp&mpu=1624", image: "images/franchiseexpo.jpg" },
         { name: "DEL ARTE LIBOURNE", url: "https://mpembed.com/show/?m=zca9WQuh75g&mpu=1624", image: "images/libourne.jpg" },
         { name: "La Varrière", url: "https://scan.avomovr.fr/show/?m=M4CL8xbdnaK", image: "images/varriere.jpg" },
         { name: "Église Saint André", url: "https://mpembed.com/show/?m=fTmxbygCkQX&mpu=1624", image: "images/saintandre.jpg" }
@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const container = document.getElementById("visites-container");
     const shareBtn = document.getElementById("share-btn");
 
-    // 🔹 Générer les cartes dynamiquement
     visites.forEach(visit => {
         let card = document.createElement("div");
         card.classList.add("card");
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(card);
     });
 
-    // 🔹 Gérer le bouton de partage
     shareBtn.addEventListener("click", function() {
         let selectedVisits = [];
         document.querySelectorAll(".visit-checkbox:checked").forEach((checkbox) => {
@@ -51,10 +49,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let message = "🌐 Voici les visites virtuelles sélectionnées :\n" + selectedVisits.join("\n");
 
-        // 🔹 Afficher la boîte de sélection
         let choice = prompt("📤 Comment souhaitez-vous partager les visites ?\n1️⃣ Gmail\n2️⃣ SMS\n3️⃣ LinkedIn\n\nEntrez le numéro de votre choix :");
 
-        // 🔹 Ouvrir l'application choisie
         if (choice === "1") {
             let emailLink = `mailto:?subject=Visites Virtuelles&body=${encodeURIComponent(message)}`;
             window.open(emailLink, "_blank");
