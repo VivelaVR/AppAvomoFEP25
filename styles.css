@@ -1,191 +1,202 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Lato:wght@400;600&display=swap');
+
+/*
+ * Couleurs et paramètres globaux
+ *
+ * L'utilisation de variables CSS simplifie l'entretien du thème et
+ * garantit une cohérence visuelle. Les teintes choisies s'inspirent
+ * d'une palette professionnelle : un bleu profond pour rappeler la
+ * technologie de la réalité virtuelle, un rouge vif pour les appels
+ * à l'action et un vert pour des actions secondaires. Ces choix
+ * respectent les meilleures pratiques en matière de lisibilité et
+ * d'accessibilité décrites dans le système de design USWDS, comme
+ * l'utilisation d'un espace suffisant autour des éléments【254573460724707†L348-L370】.
+ */
+
+:root {
+  --primary-color: #0047a3;
+  --secondary-color: #f43238;
+  --accent-color: #4CAF50;
+  --background-color: #f7f8fc;
+  --text-color: #333;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+  --transition-duration: 0.3s;
+}
 
 /* Styles de base */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+  font-family: 'Lato', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
 }
 
 /* En-tête */
 .header {
-    background-color: #000e898b;
-    color: white;
-    padding: 20px;
-    text-align: center;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 24px 0;
+  text-align: center;
 }
 
-.logo {
-    width: 150px;
-    margin-bottom: 10px;
+.header .logo {
+  width: 160px;
+  margin-bottom: 10px;
+}
+
+.header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin: 0;
 }
 
 /* Conteneur des cartes */
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-/* Cartes des visites */
+/* Cartes de visites */
 .card {
-    background: white;
-    width: 300px;
-    margin: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    padding-top: 10px;
+  background-color: #fff;
+  width: 280px;
+  margin: 16px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--card-shadow);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform var(--transition-duration) ease,
+              box-shadow var(--transition-duration) ease;
 }
 
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .card a {
-    text-decoration: none;
-    color: black;
-    display: block;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 /* Image des cartes */
 .card-img {
-    width: 100%;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    border-bottom: 5px solid #C1272D;
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Texte des cartes */
+.card p {
+  margin: 16px;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 /* Cases à cocher */
 .visit-checkbox {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    transform: scale(1.5);
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transform: scale(1.4);
+  accent-color: var(--secondary-color);
 }
 
-.visit-checkbox:hover {
-    filter: brightness(90%);
+/* Boutons génériques */
+.btn,
+#share-btn,
+#select-all-btn,
+#mic-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 10px;
+  border-radius: var(--border-radius);
+  border: none;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: background-color var(--transition-duration) ease,
+              transform 0.2s;
 }
 
-/* Boutons */
-.btn {
-    display: inline-block;
-    padding: 12px 20px;
-    margin: 10px;
-    background: #f43238;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.btn:hover {
-    background: #a02025;
-    transform: scale(1.05);
-}
-
-/* Bouton de partage */
+/* Bouton partager */
 #share-btn {
-    margin-top: 20px;
-    padding: 14px 28px;
-    background-color: #000e898b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    transition: background 0.3s ease-in-out, transform 0.2s;
+  background-color: var(--secondary-color);
+  color: #fff;
 }
 
 #share-btn:hover {
-    background-color: #000e898b;
-    transform: scale(1.05);
+  background-color: #a02025;
+  transform: scale(1.05);
 }
 
-/* Bouton de sélection */
+/* Bouton sélectionner tout */
 #select-all-btn {
-    margin-top: 15px;
-    padding: 12px 24px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background 0.3s ease-in-out, transform 0.2s;
+  background-color: var(--accent-color);
+  color: #fff;
 }
 
 #select-all-btn:hover {
-    background-color: #3e8e41;
-    transform: scale(1.05);
+  background-color: #3e8e41;
+  transform: scale(1.05);
+}
+
+/* Bouton micro (chatbot) */
+#mic-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+#mic-btn:hover {
+  background-color: #003366;
+  transform: scale(1.05);
+}
+
+/* Conteneur du chatbot */
+.chatbot-container {
+  margin-top: 40px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--card-shadow);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#chat-response {
+  margin-top: 16px;
+  font-size: 16px;
+  color: var(--text-color);
+  min-height: 32px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card {
-        width: 90%;
-    }
-
-    #share-btn, #select-all-btn {
-        width: 80%;
-        padding: 14px;
-    }
-}
-
-/* 🔥 Ajout chatbot vocal */
-.chatbot-container {
-    margin-top: 40px;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#mic-btn {
-    background-color: #000e898b;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 14px 28px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out, transform 0.2s;
-}
-
-#mic-btn:hover {
-    background-color: #000c6a;
-    transform: scale(1.05);
-}
-
-#chat-response {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #333;
-    min-height: 30px;
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 90%;
+  }
+  #share-btn,
+  #select-all-btn {
+    width: 80%;
+  }
 }

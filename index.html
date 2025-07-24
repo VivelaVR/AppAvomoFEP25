@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avomo VR - Visites Virtuelles</title>
+    <title>Avomo VR – Visites virtuelles</title>
+    <!-- Feuille de styles améliorée -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Script dédié à la génération des cartes et au partage -->
     <script defer src="script.js"></script>
 </head>
 <body>
     <div class="header">
-        <img src="images/logo.png" alt="Avomo VR Logo" class="logo">
-        <h1>Visites Virtuelles Avomo VR</h1>
+        <img src="images/logo.png" alt="Avomo VR Logo" class="logo">
+        <h1>Visites virtuelles Avomo VR</h1>
     </div>
 
     <!-- Conteneur des visites -->
@@ -18,59 +20,55 @@
         <!-- Les cartes seront générées par JavaScript -->
     </div>
 
-    <!-- Bouton de partage -->
-    <div class="buttons">
+    <!-- Boutons d’actions -->
+    <div class="buttons" style="text-align:center;">
         <button id="share-btn">Partager les visites</button>
+        <button id="select-all-btn">Sélectionner tout</button>
     </div>
 
     <!-- Chatbot vocal -->
     <div class="chatbot-container">
-        <button id="mic-btn">🎤 Parler avec Avomo IA</button>
-        <div id="chat-response">Posez-moi une question !</div>
+        <button id="mic-btn">Parler avec Avomo IA</button>
+        <div id="chat-response">Pose-moi une question !</div>
     </div>
 
+    <!-- Script de reconnaissance vocale placé en fin de fichier pour garantir le chargement du DOM -->
     <script>
-        const micBtn = document.getElementById("mic-btn");
-        const responseDiv = document.getElementById("chat-response");
-        
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang = "fr-FR";
-        
-        micBtn.addEventListener("click", () => {
-            recognition.start();
-            responseDiv.innerText = "🎤 En attente de votre voix...";
+    const micBtn = document.getElementById("mic-btn");
+    const responseDiv = document.getElementById("chat-response");
+
+    // Instanciation de l’API SpeechRecognition selon le navigateur
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "fr-FR";
+
+    micBtn.addEventListener("click", () => {
+        recognition.start();
+        responseDiv.innerText = "En attente de votre voix…";
+    });
+
+    recognition.onresult = function(event) {
+        const userInput = event.results[0][0].transcript;
+        responseDiv.innerText = "Analyse en cours : " + userInput;
+
+        // Envoi de la requête vers le webhook de traitement
+        fetch("https://avomovr.app.n8n.cloud/webhook-test/d9a5c4f1-f381-4ffd-9659-ea95411ca5c2", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userInput })
+        })
+        .then(res => res.json())
+        .then(data => {
+            responseDiv.innerText = data.reply;
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(data.reply);
+            utterance.lang = "fr-FR";
+            synth.speak(utterance);
+        })
+        .catch((error) => {
+            console.error("Erreur du fetch :", error);
+            responseDiv.innerText = "Une erreur est survenue : " + error.message;
         });
-        
-        recognition.onresult = function(event) {
-            const userInput = event.results[0][0].transcript;
-            console.log("🎙️ Tu as dit :", userInput);
-            responseDiv.innerText = "⏳ Analyse en cours : " + userInput;
-        
-            console.log("🛠️ Envoi au webhook:", userInput);
-            fetch("https://avomovr.app.n8n.cloud/webhook-test/d9a5c4f1-f381-4ffd-9659-ea95411ca5c2", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userInput })
-            })
-            .then(res => {
-                console.log("📩 Réponse reçue du webhook");
-                return res.json();
-            })
-            .then(data => {
-                console.log("🤖 Contenu de la réponse :", data);
-                responseDiv.innerText = "🤖 " + data.reply;
-        
-                const synth = window.speechSynthesis;
-                const utterance = new SpeechSynthesisUtterance(data.reply);
-                utterance.lang = "fr-FR";
-                synth.speak(utterance);
-            })
-            .catch((error) => {
-                console.error("❌ Erreur du fetch :", error);
-                responseDiv.innerText = "❌ Une erreur est survenue : " + error.message;
-            });
-        };
-        </script>
-        
+    };
+    </script>
 </body>
 </html>
